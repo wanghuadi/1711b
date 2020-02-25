@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.GoodsMapper">
+
+	<select id="queryAll" resultType="com.bw.bean.Goods">
+		select * from tb_goods g,tb_brand b,tb_kind k
+		where g.kid = k.kid and g.bid = b.bid and g.deleted = 0
+	</select>
+	
+	<select id="queryBrand" resultType="com.bw.bean.Brand">
+		select * from tb_brand
+	</select>
+	
+	<select id="queryKind" resultType="com.bw.bean.Kind">
+		select * from tb_kind
+	</select>
+	
+	
+	<insert id="addGoods" parameterType="com.bw.bean.Goods">
+		insert into tb_goods
+		(gname,ename,bid,kid,size,price,gnum,label,picurl)
+		values
+		(#{gname},#{ename},#{bid},#{kid},#{size},#{price},#{gnum},#{label},#{picurl})
+	</insert>
+	
+	<select id="queryGoodsById" parameterType="int" resultType="com.bw.bean.Goods">
+		select * from tb_goods where gid=#{0}
+	</select>
+	
+	<update id="update" parameterType="com.bw.bean.Goods">
+			update tb_goods set
+		gname=#{gname},ename=#{ename},bid=#{bid},
+		kid=#{kid},size=#{size},price=#{price},gnum=#{gnum},label=#{label},picurl=#{picurl}
+		where gid=#{gid}
+	</update>
+	
+	<update id="delGoods" parameterType="int">
+		update tb_goods set deleted = 1 where gid in (${gid})
+	</update>
+	
+</mapper>
