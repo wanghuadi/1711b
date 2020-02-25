@@ -2,6 +2,7 @@ package com.bw.bean;
 
 public class Brand {
 	private Integer bid;
+	//sssss
 	private String bname;
 	public Integer getBid() {
 		return bid;
